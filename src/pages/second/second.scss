@@ -1,0 +1,102 @@
+page-second {
+
+  .header-md:after{
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+  }
+  .button-md{
+    background-color: #343F4F;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .button-ios{
+    background-color: #343F4F;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .master {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #343F4F;
+  }
+  .bottom {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+  }
+  .test1 {
+    width: 100%;
+
+    flex-grow: 4;
+
+    vertical-align: text-top;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;;
+  }
+  .challengeDay {
+    font-size: 14rem;
+    font-family: "SourceSansPro-Regular";
+    color: #fcfaf0;
+    background: transparent;
+  }
+  .ButtonNotPressed {
+    margin: auto;
+    width: 80%;
+    height: 50px;
+    padding: 0;
+    font-size: 22px;
+    font-family: "SourceSansPro-Regular";
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #FC6D6D;
+    border: 0.5px #FC6D6D solid;
+    border-radius: 40px;
+    outline: 0 none;
+    box-shadow: none;
+    -webkit-appearance: none;
+  }
+  .ButtonPressed{
+    background: #57CA57;
+    border: 0.5px #57CA57 solid;
+    width: 50%;
+    border-radius: 40px;
+    margin: auto;
+    height: 50px;
+    padding: 0;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    outline: 0 none;
+    box-shadow: none;
+    -webkit-appearance: none;
+
+  }
+
+  .information{
+    color: #fcfaf0;
+  }
+
+  @media screen and (orientation: landscape) {
+    .challengeButton{
+      width: 50%;
+    }
+  }
+
+}

@@ -1,0 +1,43 @@
+page-home {
+
+  .master{
+    background-color:#E9EAED;
+  }
+  h2{
+    text-align: center;
+
+  }
+  rows{
+    margin: 3em;
+  }
+  ion-row{
+    height:50%;
+    border: 1px black solid;
+
+  }
+
+  ion-col{
+    height:40%;
+    border-left: 1px black solid;
+
+  }
+
+  ion-grid{
+    height: 100%;
+  }
+
+  @media screen and (orientation: landscape){
+    ion-col {
+      height: 100%;
+
+    }
+    ion-row{
+      height:100%;
+    }
+    img{
+      height: 90%;
+      width: 90%;
+    }
+
+  }
+}

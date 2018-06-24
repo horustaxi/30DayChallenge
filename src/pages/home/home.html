@@ -1,0 +1,45 @@
+<ion-content class="master">
+  <ion-scroll scrollY="true" style="width: 100%; height: 100%;">
+  <ion-grid>
+    <ion-row>
+      <ion-card>
+        <ion-card-header>
+          One steo forward
+        </ion-card-header>
+        <ion-card-content>
+          The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row class="rows">
+      <ion-col col-6 col-lg-6>
+        <div class="item item-avatar" (click)="launchSecondPgae()">
+          <img src="assets/imgs/squat.png">
+          <h2>Squat</h2>
+        </div>
+
+
+      </ion-col>
+      <ion-col col-6 col-lg-6 (click)="launchTimerPage()">
+        <img src="assets/imgs/situp.png">
+        <h2>crunches</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="rows">
+      <ion-col col-6 col-lg-6>
+        <img src="assets/imgs/pushup.png">
+        <h2>Push ups</h2>
+      </ion-col>
+      <ion-col col-6 col-lg-6>
+        <img src="assets/imgs/plank.png">
+        <h2>Plank</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-scroll>
+
+
+
+
+</ion-content>
