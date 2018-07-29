@@ -10,12 +10,23 @@ page-second {
     box-shadow: none;
     border: 0;
   }
+  .button-inner, .toolbar-title{
+    text-transform: uppercase;
+    color: white;
+  }
 
-  .button-ios{
+  .button-ios, .toolbar-background-md{
     background-color: #343F4F;
     box-shadow: none;
     border: 0;
   }
+
+  .toolbar-background-md{
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+  }
+
 
   .master {
     height: 100%;
@@ -74,10 +85,10 @@ page-second {
   .ButtonPressed{
     background: #57CA57;
     border: 0.5px #57CA57 solid;
-    width: 50%;
-    border-radius: 40px;
+    width: 20%;
+    border-radius: 80%;
     margin: auto;
-    height: 50px;
+    height: 60px;
     padding: 0;
     font-size: 22px;
     color: white;
@@ -88,6 +99,8 @@ page-second {
     -webkit-appearance: none;
 
   }
+
+
 
   .information{
     color: #fcfaf0;

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ModalController} from 'ionic-angular';
-import {Storage} from '@ionic/storage';
 import {CalendarPage} from '../calendar/calendar';
-import {NativeStorage} from'@ionic-native/native-storage'
+import {NativeStorage} from "@ionic-native/native-storage";
+
 /**
  * Generated class for the SecondPage page.
  *
@@ -18,41 +18,57 @@ import {NativeStorage} from'@ionic-native/native-storage'
 export class SecondPage {
 
   //Array of the workouts
-  challengeArray: any[];
+  challengeArray: string[];
   //Gey which day we will play
   day: number;
   //Index of the day in the array
   index: number;
+  challengeName: string;
   //Has this challenge ended
   challengeComplete = false;
   //Store the playedTodayArray of last time the player played
   playedTodayArray: Number[];
   //Done playing for the day
-  play: boolean;
+  play = true;
+  challengeInfo: any;
+  timerended: boolean = false;
+  timerStarted: boolean = false;
+  maxTime: number = 5;
+  timerM: number;
+  color = "#fce300";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public storage: Storage, public modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController,
+              public storage: NativeStorage) {
 
-    console.log('constructor loaded')
-    this.challengeArray = this.navParams.get('challenge');
-    this.index = this.navParams.get('index');
-    this.day = this.challengeArray[this.index];
-    this.playedTodayArray = new Date().toLocaleDateString().split('/').map(Number);
-    console.warn("the squat day is ", this.day);
+    console.log('constructor loaded');
+    this.challengeName = this.navParams.get('challengeName');
+    this.challengeArray = this.navParams.get('challengeArray');
+
+    this.playedTodayArray = new Date().toLocaleDateString().split('/').map(item => parseInt(item));
+    console.log(this.playedTodayArray);
+    this.storage.getItem(this.challengeName).then(
+      data => this.challengeInfo = data,
+      error => {
+        console.log('oops error', error);
+        this.index = 0;
+
+      }
+    );
 
 
   }
 
+
   ionViewWillEnter() {
     console.log("ion view entered");
     this.canUserPlay();
-    this.storage.get("day").then(result => {
-      console.log("the modified val is ", result);
-      this.index = result;
-    }).catch(e=>{
+    if (this.challengeInfo != null) {
+      this.index = this.challengeInfo['day'];
+    }
 
-    })
-
+    this.day = parseInt(this.challengeArray[this.index]);
   }
 
   ionViewWillLeave() {
@@ -61,17 +77,20 @@ export class SecondPage {
   }
 
 
-  // Called when Done button is pressed
+  //Called when Done button is pressed
   playedForTheDay() {
     this.play = false;
-    this.storage.set("playedLast", this.playedTodayArray)
-      .then(() => {
-        console.log("user played last at", this.playedTodayArray)
-      });
+    this.storage.setItem(this.challengeName, {"playedLast": this.playedTodayArray}).then(() => {
+      console.log("user played last at", this.playedTodayArray)
+    });
     if (this.index < 30) {
       this.index++;
-      this.storage.set("day", this.index + 1)
-      this.day = this.challengeArray[this.index];
+      this.storage.setItem(this.challengeName, {"day": this.index, "playedLast": this.playedTodayArray})
+      if (this.challengeName == 'plank') {
+        this.maxTime = parseInt(this.challengeArray[this.index]);
+      } else {
+        this.day = parseInt(this.challengeArray[this.index]);
+      }
     } else {
       this.challengeComplete = true;
     }
@@ -81,9 +100,9 @@ export class SecondPage {
   //Called to handle the logic of play once per day
 
   canUserPlay() {
-    this.storage.get("playedLast").then(result => {
-      /* first we conpare the month*/
-      console.log("the result is :", result);
+
+    if (this.challengeInfo) {
+      let result = this.challengeInfo['playedLast'];
       if (!result) {
         this.play = true;
         return
@@ -100,16 +119,46 @@ export class SecondPage {
           this.play = true
         }
       }
+    }
+    else {
 
-    }).catch(e => {
-      console.warn("oops first time playing", e);
-    });
+      console.warn("oops first time playing");
+    }
   }
 
-  lanuchCalendarPage(){
+  lanuchCalendarPage() {
 
-    let calModal = this.modalCtrl.create(CalendarPage, { data: this.challengeArray });
+    let calModal = this.modalCtrl.create(CalendarPage, {data: this.challengeArray, day : this.index});
     calModal.present();
+  }
+
+
+  StartTimer() {
+    this.timerStarted = true;
+    this.timerM = setTimeout(() => {
+
+      this.maxTime -= 1;
+
+      if (this.maxTime == 1 && this.timerended == false) {
+        this.maxTime = this.day;
+        this.timerended = true;
+
+
+      }
+
+      if (this.maxTime > 0) {
+        this.StartTimer();
+      }
+
+      else {
+        clearInterval(this.timerM);
+        this.playedForTheDay();
+
+      }
+
+    }, 1000);
+
+
   }
 
 }

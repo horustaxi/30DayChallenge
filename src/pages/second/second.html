@@ -6,23 +6,40 @@
 -->
 <ion-content>
   <ion-header>
-
+    <ion-navbar>
+<ion-title text-center="true">{{challengeName}}</ion-title>
     <ion-buttons end>
+
       <button icon-only ion-button  (click)="lanuchCalendarPage()">
         <ion-icon name="menu"></ion-icon>
+
       </button>
     </ion-buttons>
-
+    </ion-navbar>
   </ion-header>
   <div class="master">
     <div class="test1">
-    <h1 class="challengeDay">{{day}}</h1>
+
+    <h1 class="challengeDay" *ngIf="challengeName != 'plank'">{{day}}</h1>
+      <h1 class="challengeDay" *ngIf="challengeName == 'plank'">{{maxTime}}</h1>
     </div>
-    <div class="bottom">
+    <div class="bottom" *ngIf="challengeName != 'plank'">
     <button class="ButtonNotPressed" (click)="playedForTheDay()"
             *ngIf="play==true">Complete The Challenge</button>
+
+
+
+
       <button class="ButtonPressed"
-              *ngIf="play==false"><ion-icon name="thumbs-up"></ion-icon> Done</button>
+              *ngIf="play==false"><ion-icon name="thumbs-up"></ion-icon></button>
+
    </div>
+    <div class="bottom" *ngIf="challengeName == 'plank'">
+      <button class="ButtonNotPressed" (click)="StartTimer()" *ngIf="timerStarted==false && play==true">Start Timer</button>
+
+      <button class="ButtonPressed"
+              *ngIf="play==false"><ion-icon name="thumbs-up"></ion-icon></button>
+
+    </div>
   </div>
 </ion-content>

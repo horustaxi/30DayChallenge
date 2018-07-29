@@ -21,13 +21,18 @@ export class TimerPage {
   maxTime:number=5;
   timerM:number;
   color ="#fce300";
+  day : string
+  index : number;
+  challengeArray : string[];
   constructor(public navCtrl: NavController, public navParams: NavParams, private dialogs: Dialogs) {
+
+    this.challengeArray = this.navParams.get('challengeArray');
 
   }
 
   StartTimer(){
 
-    this.timerM = setTimeout(x =>
+    this.timerM = setTimeout(()=>
       {
 
         this.maxTime -= 1;

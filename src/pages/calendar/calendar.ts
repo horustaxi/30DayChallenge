@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams, ViewController, Slides  } from 'io
   templateUrl: 'calendar.html',
 })
 export class CalendarPage {
-  @ViewChild('slides') private slides: Slides;
+  @ViewChild('Slides') slides: Slides;
   challengeDays : any;
+  index = 1;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
 
   }
@@ -26,7 +27,7 @@ export class CalendarPage {
 
 
   slideChanged(){
-    //let index = this.slides.getPreviousIndex();
+    this.index ++;
     //let requiredId = this.challengeDays[index].id;
   }
 
@@ -35,6 +36,8 @@ export class CalendarPage {
   }
 
   ionViewWillEnter(){
+
     this.challengeDays = this.navParams.get("data");
+
   }
 }

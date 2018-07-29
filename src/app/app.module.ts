@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {IonicStorageModule} from "@ionic/storage";
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {SecondPage} from '../pages/second/second';
@@ -13,6 +12,8 @@ import { TimerPage } from '../pages/timer/timer';
 import { CalendarPage} from '../pages/calendar/calendar';
 import { RetrieveDataProvider } from '../providers/retrieve-data/retrieve-data';
 import {Dialogs} from '@ionic-native/dialogs';
+import {IonicStorageModule} from "@ionic/storage";
+import {NativeStorage} from "@ionic-native/native-storage";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import {Dialogs} from '@ionic-native/dialogs';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RetrieveDataProvider,
+    NativeStorage,
+
   ]
 })
 export class AppModule {}

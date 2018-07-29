@@ -13,9 +13,9 @@
         </ion-buttons>
       </ion-header>
   <div class="master">
-      <ion-slides>
-      <ion-slide  *ngFor="let challengeDay of challengeDays" (ionSlideDidChange)=slideChanged()>
-        <h1 class="challengeDayIndex"> DAY {{challengeDays.indexOf(challengeDay)+1}}</h1>
+      <ion-slides (ionSlideWillChange)="slideChanged()">
+      <ion-slide  *ngFor="let challengeDay of challengeDays">
+        <h1 class="challengeDayIndex"> DAY {{index}}</h1>
           <div class="test1">
               <h1 class="challengeDay">{{challengeDay}}</h1>
           </div>
